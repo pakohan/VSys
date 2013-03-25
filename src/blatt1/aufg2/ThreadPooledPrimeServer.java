@@ -10,7 +10,7 @@ import java.util.concurrent.Executors;
 public class ThreadPooledPrimeServer extends Thread {
     private final ServerEndpoint endpoint;
     private final ExecutorService pool;
-    private Boolean isKilled = false;
+    public volatile Boolean isKilled = false;
 
     private static final int numbercores = Runtime.getRuntime().availableProcessors();
     private static final double nonBlockingFactor = 1.0;
@@ -25,8 +25,15 @@ public class ThreadPooledPrimeServer extends Thread {
         System.out.println("Threaded PrimeServer up and running...");
 
         while (!isKilled) {
-            pool.execute(new Handler(endpoint.blockingReceive(), endpoint));
+            ServerEndpoint.Request req = endpoint.blockingReceive();
+            if (req.getNumber() == -1L) {
+                break;
+            }
+
+            pool.execute(new Handler(req, endpoint));
         }
+
+        System.out.println("Server killed");
     }
 
     public static void main(String[] args) {

@@ -12,13 +12,14 @@ public class ThreadPooledPrimeServer extends Thread {
     private final ExecutorService pool;
     public volatile Boolean isKilled = false;
 
-    private static final int numbercores = Runtime.getRuntime().availableProcessors();
+    private static final int numberCores = Runtime.getRuntime().availableProcessors();
     private static final double nonBlockingFactor = 1.0;
+    private static final long POISON_PILL = -1L;
 
     public ThreadPooledPrimeServer() {
         endpoint = new ServerEndpoint();
-        int x = new Double(Math.ceil(nonBlockingFactor * numbercores)).intValue();
-        pool = Executors.newFixedThreadPool(x);
+        int poolSize = new Double(Math.ceil(nonBlockingFactor * numberCores)).intValue();
+        pool = Executors.newFixedThreadPool(poolSize);
     }
 
     public void run() {
@@ -26,7 +27,7 @@ public class ThreadPooledPrimeServer extends Thread {
 
         while (!isKilled) {
             ServerEndpoint.Request req = endpoint.blockingReceive();
-            if (req.getNumber() == -1L) {
+            if (req.getNumber() == POISON_PILL) {
                 break;
             }
 

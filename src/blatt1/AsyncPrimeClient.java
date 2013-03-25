@@ -25,19 +25,16 @@ public class AsyncPrimeClient extends  Thread {
         endpoint.send(server, number);
         System.out.print("Die Zahl " + number + " ist");
 
-        new Poller(endpoint,this).start();
+        new Waiter(endpoint,this).start();
 
-        while (true) {
-            if (finished) {
-                break;
-            } else {
+        while (!finished) {
+
                 System.out.print(".");
                 try {
                     Thread.sleep(1000L);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-            }
         }
     }
 

@@ -5,11 +5,11 @@ package blatt1;
  * Date: 24.03.13
  * Time: 17:17
  */
-public final class Poller extends Thread {
+public final class Waiter extends Thread {
     private volatile AsyncPrimeClient waiter;
     private ClientEndpoint endpoint;
 
-    public Poller(ClientEndpoint endpoint, AsyncPrimeClient waiter) {
+    public Waiter(ClientEndpoint endpoint, AsyncPrimeClient waiter) {
         this.waiter = waiter;
         this.endpoint = endpoint;
     }

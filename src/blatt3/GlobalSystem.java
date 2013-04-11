@@ -1,28 +1,49 @@
 package blatt3;
 
 public class GlobalSystem {
-	private final static int PROCESSES = 10;
+	private final Cell[][] board = new Cell[8][8];
 
-	void run() throws InterruptedException {
-		Process[] processes = new Process[PROCESSES];
-
-		for (int i = 0; i < processes.length; i++)
-			processes[i] = new BullyProcess(i);
-
-		for (Process source : processes) {
-			for (Process destination : processes)
-				if (!source.equals(destination))
-					source.connect(destination);
-			new Thread(source).start();
+	public GlobalSystem() {
+		for (int x = 0; x < 8; x++) {
+			for (int y = 0; y < 8; y++) {
+				board[x][y] = new Cell(x, y);
+			}
 		}
 
-		processes[8].setActive(false);
-		processes[9].setActive(false);
-		processes[0].startElection();
+		CompositeDirectory root = new CompositeDirectory(null);
+
+		int entity = 1;
+		for (int x1 = 0; x1 < 2; x1++) {
+			for (int y1 = 0; y1 < 2; y1++) {
+				CompositeDirectory dir1 = new CompositeDirectory(root);
+				for (int x2 = 0; x2 < 2; x2++) {
+					for (int y2 = 0; y2 < 2; y2++) {
+						CompositeDirectory dir2 = new CompositeDirectory(dir1);
+						for (int x3 = 0; x3 < 2; x3++) {
+							for (int y3 = 0; y3 < 2; y3++) {
+								LeafDirectory leaf = new LeafDirectory(board[4
+										* x1 + 2 * x2 + x3][4 * y1 + 2 * y2
+										+ y3], dir2);
+								leaf.insert(entity);
+								if (entity > 1)
+									System.out.println("Entity " + (entity - 1)
+											+ " is in cell "
+											+ leaf.lookup(entity - 1));
+								entity++;
+							}
+						}
+					}
+				}
+			}
+		}
+
+        // System.out.println(root.lookup(3));
 	}
 
-	public static void main(String[] args) throws InterruptedException {
-		new GlobalSystem().run();
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		new GlobalSystem();
 	}
-
 }

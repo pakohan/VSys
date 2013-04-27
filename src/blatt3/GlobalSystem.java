@@ -37,7 +37,7 @@ public class GlobalSystem {
 			}
 		}
 
-        // System.out.println(root.lookup(3));
+        System.out.println(root.lookup(3));
 	}
 
 	/**

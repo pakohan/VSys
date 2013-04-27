@@ -17,7 +17,6 @@ public class CompositeDirectory extends Directory {
     }
 
     Cell lookup(int entity){
-    //    Directory d =  m.get(new Integer(entity));
         Directory d =  m.get(entity);
         if (d == null && parent != null) {
             d = parent;

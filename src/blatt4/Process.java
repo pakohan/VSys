@@ -7,7 +7,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 
 public abstract class Process implements Runnable {
     private final int id;
-    private boolean active = true;
+    protected boolean active = true;
     protected BlockingQueue<Message> msgQueue = new LinkedBlockingQueue<Message>();
     protected final Map<Integer, Process> destinations = new HashMap<Integer, Process>();
     public static volatile Integer numb = 0;

@@ -10,6 +10,8 @@ public final class LocalForumSetup {
         ForumServer server = new ForumServer(LocalModelReceiver.INSTANCE);
 
         try {
+            server.run();
+
             ForumClient client1 = new ForumClient(new LocalModelForwarder());
             ForumClient client2 = new ForumClient(new LocalModelForwarder());
 

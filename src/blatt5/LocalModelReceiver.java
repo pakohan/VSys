@@ -41,7 +41,7 @@ public final class LocalModelReceiver implements IForumModel, Runnable {
 
     @Override
     public void registerView(String name, IForumView view) throws AlreadyBoundException, IOException {
-        ForumModel.INSTANCE.registerView(name, view);
+        ForumModel.INSTANCE.registerView(name, new LocalViewForwarder(view));
     }
 
     @Override

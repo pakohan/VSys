@@ -1,15 +1,15 @@
-package blatt5;
-
-import java.io.IOException;
-import java.util.Map;
+package blatt6;
 
 import forum.framework.IForumView;
 import forum.framework.Position;
 
-public final class LocalViewForwarder implements IForumView {
+import java.io.IOException;
+import java.util.Map;
+
+public class RmiViewForwarder implements IRemoteForumView {
     private IForumView view;
 
-    public LocalViewForwarder(IForumView view) {
+    public RmiViewForwarder(IForumView view) {
         this.view = view;
     }
 

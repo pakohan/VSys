@@ -6,7 +6,7 @@ import forum.framework.Position;
 import java.io.IOException;
 import java.util.Map;
 
-public class RmiViewForwarder implements IRemoteForumView {
+public final class RmiViewForwarder implements IRemoteForumView {
     private IForumView view;
 
     public RmiViewForwarder(IForumView view) {

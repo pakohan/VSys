@@ -2,7 +2,7 @@ package blatt6;
 
 import forum.framework.ForumClient;
 
-public class RmiForumClient {
+public final class RmiForumClient {
     public static void main(String[] args) {
 
         try {

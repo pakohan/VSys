@@ -8,7 +8,7 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.Map;
 
-public class RmiViewReceiver extends UnicastRemoteObject implements IRemoteForumView {
+public final class RmiViewReceiver extends UnicastRemoteObject implements IRemoteForumView {
     private IForumView view;
 
     public RmiViewReceiver(IForumView view) throws RemoteException {

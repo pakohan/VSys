@@ -10,7 +10,7 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
-public class RmiModelForwarder implements IForumModel {
+public final class RmiModelForwarder implements IForumModel {
     private IRemoteForumModel server;
 
     public RmiModelForwarder() {

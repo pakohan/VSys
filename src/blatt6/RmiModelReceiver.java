@@ -11,28 +11,16 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 
-public class RmiModelReceiver extends UnicastRemoteObject implements IRemoteForumModel, Runnable {
-    private static RmiModelReceiver INSTANCE;
+public final class RmiModelReceiver extends UnicastRemoteObject implements IRemoteForumModel, Runnable {
 
-    private RmiModelReceiver() throws RemoteException { }
-
-    public static RmiModelReceiver getInstance() {
-        if (INSTANCE == null) {
-            try {
-                INSTANCE = new RmiModelReceiver();
-            } catch (RemoteException e) {
-                e.printStackTrace();
-            }
-        }
-
-        return INSTANCE;
+    public RmiModelReceiver() throws RemoteException {
     }
 
     @Override
     public void run() {
         try {
             Registry reg = LocateRegistry.getRegistry(1099);
-            reg.bind("server", INSTANCE);
+            reg.bind("server", this);
         } catch (RemoteException e) {
             e.printStackTrace();
         } catch (AlreadyBoundException e) {

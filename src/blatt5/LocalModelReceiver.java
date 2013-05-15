@@ -48,5 +48,4 @@ public final class LocalModelReceiver implements IForumModel, Runnable {
     public void run() {
 
     }
-
 }

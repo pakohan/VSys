@@ -16,7 +16,7 @@ public final class RmiModelForwarder implements IForumModel {
     public RmiModelForwarder() {
         try {
             Registry reg = LocateRegistry.getRegistry(1099);
-            this.server = (IRemoteForumModel) reg.lookup("server");
+            this.server = (IRemoteForumModel) reg.lookup("blatt7/server");
         } catch (RemoteException e) {
             e.printStackTrace();
         } catch (NotBoundException e) {

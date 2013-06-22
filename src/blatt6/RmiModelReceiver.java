@@ -20,7 +20,7 @@ public final class RmiModelReceiver extends UnicastRemoteObject implements IRemo
     public void run() {
         try {
             Registry reg = LocateRegistry.getRegistry(1099);
-            reg.bind("server", this);
+            reg.bind("blatt7/server", this);
         } catch (RemoteException e) {
             e.printStackTrace();
         } catch (AlreadyBoundException e) {
